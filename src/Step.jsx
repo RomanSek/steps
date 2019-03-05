@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import defaultClassNames from 'classnames';
 
 function isString(str) {
   return typeof str === 'string';
@@ -9,6 +9,7 @@ function isString(str) {
 export default class Step extends React.Component {
   static propTypes = {
     className: PropTypes.string,
+    classNames: PropTypes.func,
     prefixCls: PropTypes.string,
     style: PropTypes.object,
     wrapperStyle: PropTypes.object,
@@ -36,10 +37,14 @@ export default class Step extends React.Component {
       error: PropTypes.node,
     }),
   };
+  static defaultProps = {
+    classNames: defaultClassNames,
+  };
   renderIconNode() {
     const {
       prefixCls, progressDot, stepNumber, status, title, description, icon,
       iconPrefix, icons,
+      classNames,
     } = this.props;
     let iconNode;
     const iconClassName = classNames(`${prefixCls}-icon`, `${iconPrefix}icon`, {
@@ -80,6 +85,7 @@ export default class Step extends React.Component {
       adjustMarginRight, stepNumber,
       description, title, progressDot, tailContent,
       icons,
+      classNames,
       ...restProps,
     } = this.props;
 

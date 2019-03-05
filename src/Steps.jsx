@@ -2,7 +2,7 @@
 import React, { cloneElement, Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import classNames from 'classnames';
+import defaultClassNames from 'classnames';
 import debounce from 'lodash/debounce';
 import { isFlexSupported } from './utils';
 
@@ -10,6 +10,7 @@ export default class Steps extends Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     className: PropTypes.string,
+    classNames: PropTypes.func,
     iconPrefix: PropTypes.string,
     direction: PropTypes.string,
     labelPlacement: PropTypes.string,
@@ -38,6 +39,7 @@ export default class Steps extends Component {
     status: 'process',
     size: '',
     progressDot: false,
+    classNames: defaultClassNames,
   };
   constructor(props) {
     super(props);
@@ -93,6 +95,7 @@ export default class Steps extends Component {
       prefixCls, style = {}, className, children, direction,
       labelPlacement, iconPrefix, status, size, current, progressDot, initial,
       icons,
+      classNames,
       ...restProps,
     } = this.props;
     const { lastStepOffsetWidth, flexSupported } = this.state;
